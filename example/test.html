@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <script type="text/javascript" src="http://h5.dev.weidian.com:8080/build/watcher.debug.js"></script>
+    <script>
+        window.Watcher && window.Watcher({
+            reportUrl:'http://www.yosiu.com',//上报地址
+        })
+    </script>
+    <style type="text/css">
+        .list {
+            height: 80px;
+            background: #ccc;
+            text-align: center;
+            line-height: 80px;
+            font-size: 30px;
+            margin: 20px auto;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="list" id="window">window error</div>
+        <div class="list" id="http">http error</div>
+    </div>
+</body>
+<script type="text/javascript" >
+
+  document.querySelector('#window').addEventListener('click',function(){
+    console.log(a)
+  })
+
+  document.querySelector('#http').addEventListener('click',function(){
+    
+  })
+  console.log(a)
+
+</script>
+</html>

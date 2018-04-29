@@ -1,0 +1,60 @@
+{
+    "root": true,
+    "env": {
+        "browser": true
+    },
+    "globals": {
+        "require": true,
+        "module": true,
+        "exports": true,
+        "Promise": true,
+        "import" : true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        // function a() {}
+        "space-before-blocks": ["error", "always"],
+        // for (var i = 0; i < len; i++)
+        "semi-spacing": ["error", {
+            "before": false,
+            "after": true
+        }],
+        // var a = 5, b = 6
+        "comma-spacing": ["error", {
+            "before": false,
+            "after": true
+        }],
+        // if (true) {} else {}
+        "keyword-spacing": ["error", {
+            "before": true,
+            "after": true
+        }],
+        "no-mixed-spaces-and-tabs": "error",
+        // a + b
+        "space-infix-ops": "error",
+        // new Cat()
+        "space-unary-ops": "error",
+        "indent": [
+            "error",
+            4, {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "strict": ["error", "global"],
+        "no-unused-vars": "off",
+        "no-console": "off",
+        "require-yield": "off",
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}
