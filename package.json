@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A browser error monitoring script",
   "scripts": {
-    "dev": "http-server -a h5.dev.weidian.com & gulp watch",
+    "dev": "http-server -a 127.0.0.1 & gulp watch",
     "build": "gulp build"
   },
   "keywords": [

@@ -51,12 +51,12 @@ function _JSONParseSafty(str) {
 }
 
 function _listenXhrResponse(xhr) {
-  var requestUrl = xhr._http.url;
+  var _httpInfo = xhr._http;
   setTimeout(function() {
     if (xhr.readyState !== xhr.DONE) {
       _errorReport({
         type: "__XHR__",
-        url: requestUrl,
+        httpInfo: _httpInfo,
         message: "slow-response",
       });
     }
@@ -67,11 +67,14 @@ function _listenXhrResponse(xhr) {
     if (xhr.response) {
       res = _JSONParseSafty(xhr.response);
     }
-
+    /**
+     * 配置正确返回结构
+     * 根据具体业务添加
+     */
     if (res && res.status && res.status.code !== 0 && res.status.status_code != 0) {
       _errorReport({
         type: "__XHR__",
-        url: requestUrl,
+        httpInfo: _httpInfo,
         message: "response-unexpect",
         detail: {
           status: _JSONStringifySafty(res.status)
@@ -83,21 +86,21 @@ function _listenXhrResponse(xhr) {
   xhr.addEventListener("error", function(e) {
     _errorReport({
       type: "__XHR__",
-      url: requestUrl,
+      httpInfo: _httpInfo,
       message: "response-error",
     });
   });
   xhr.addEventListener("abort", function() {
     _errorReport({
       type: "__XHR__",
-      url: requestUrl,
+      httpInfo: _httpInfo,
       message: "response-abort",
     });
   });
   xhr.addEventListener("timeout", function() {
     _errorReport({
       type: "__XHR__",
-      url: requestUrl,
+      httpInfo: _httpInfo,
       message: "response-timeout",
     });
   });
@@ -121,13 +124,15 @@ function _post(options) {
       }catch (e) {
 
       }
+    }else{
+
     }
   };
   xhr.open("POST", options.url, true);
   xhr.withCredentials = true;
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhr.setRequestHeader("Accept", "application/json, text/plain, */*");
-  xhr.send(_JSONStringifySafty(options.data));
+  xhr.send(options.paramKeyString+_JSONStringifySafty(options.data));
 }
 
 function _handleError(evt) {
@@ -159,6 +164,7 @@ function _errorReport(error) {
   }
   _post({
     url: _config.reportUrl,
+    paramKeyString:_config.paramKey ? _config.paramKey+'=':'',
     data: error
   })
 }
@@ -176,6 +182,7 @@ function _watchXhrError() {
   xhrProto.send = function() {
     var xhr = this;
     if (!_isReportUrl(xhr._http.url)) {
+      xhr._http.param = decodeURIComponent([].slice.call(arguments));
       _listenXhrResponse(xhr);
     }
     return xhrProto._send.apply(this, [].slice.call(arguments));
