@@ -30,15 +30,6 @@
     </div>
 </body>
 <script type="text/javascript" >
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://vap.gw.weidian.com/h5/fxweb/buyerItem.topItems/1.0");
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  var searchParams = JSON.stringify({"userID":924061386, "retailSellerId":924061386, "pageNum":0, "pageSize":10, "isTop":0});
-  xhr.send("request=" + searchParams);
-
-
-  xhr.open("GET", "http://vap.gw.daily.weidian.com/h5/vcart/priceReduceNum/2.0");
-  xhr.send("request=%7B%22source%22%3A%22h5%22%7D&param=%7B%7D");
   document.querySelector('#window').addEventListener('click',function(){
     console.log(a)
   })
